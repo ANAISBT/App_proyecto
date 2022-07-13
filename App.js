@@ -1,7 +1,6 @@
 import AppLoading from 'expo-app-loading';
-import HomeScreen from './src/screens/Home';
 import React from 'react';
-import Root from './src/Root';
+import Root from './src';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -21,7 +20,6 @@ export default function App() {
   }
 
   return (
-    <HomeScreen/>
-    // <Root/>
+  <Root/>
   );
 }
