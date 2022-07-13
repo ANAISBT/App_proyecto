@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
+import AccountScreen from "./screens/Account";
 import HomeScreen from "./screens/Home";
 import LoginScreen from "./screens/Login";
 import {NavigationContainer} from "@react-navigation/native";
@@ -22,6 +23,12 @@ const Root = () => {
         />
         <Stack.Screen name="Home" 
         component={HomeScreen} 
+        options={{headerShown:false}}
+        />
+
+        <Stack.Screen name="Account" 
+        component={AccountScreen} 
+        options={{headerShown:false}}
         />
       </Stack.Navigator>
       </NavigationContainer>

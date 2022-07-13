@@ -9,6 +9,8 @@ const LoginScreen=({navigation})=>{
 
     const [email,setEmail]=React.useState('')
     const [password,setPasword]=React.useState('')
+
+    const[errorMessage, setErrorMessage]=React.useState('')
   
     const app=initializeApp(firebaseConfig);
     const auth=getAuth(app);
@@ -17,6 +19,7 @@ const LoginScreen=({navigation})=>{
       createUserWithEmailAndPassword(auth,email,password)
       .then((userCredential)=>{
         console.log('Cuenta Creada!')
+        
         const user=userCredential.user;
         console.log(user)
       })
@@ -27,16 +30,20 @@ const LoginScreen=({navigation})=>{
     }
   
     const handleSignIn=()=>{
+        if(email!== "" && password!==""){
       signInWithEmailAndPassword(auth,email,password)
       .then((userCredential)=>{
         console.log('Acceso Exitoso!')
         const user=userCredential.user;
         console.log(user)
-        navigation.navigate('Home');
+        navigation.navigate('Home',{user});
       })
       .catch(error=>{
-        console.log(error)
+        setErrorMessage(error.message)
       })
+    }else{
+        setErrorMessage("Porfavor ingresa tu email y tu contraseña");
+    }
     }
   
     return (
@@ -52,6 +59,7 @@ const LoginScreen=({navigation})=>{
         }}>
           <View style={styles.login}>
           <Image source={require('../../IMG/lovepik-girl-writing-thank-you-note-png-image_401867914_wh1200.png')} style={styles.picture}/>
+          <Text style={{marginBottom:15,fontSize:17,fontWeight:'600',color:'gray'}}>{errorMessage}</Text>
           <View >
             <Text style={{fontSize:17,fontWeight:'600',color:'gray'}}>E-mail</Text>
             <TextInput onChangeText={(text)=>setEmail(text)} style={styles.input} placeholder="nombre@gmail.com"/>
@@ -87,7 +95,7 @@ export default LoginScreen;
     },
     login:{
       width: 350,
-      height: 520,
+      height: 540,
       borderRadius:10,
       borderWidth:2,
       borderColor:"#fff",
