@@ -23,7 +23,7 @@ function LoginScreen(){
 
   const handleCreateAccount=()=>{
     createUserWithEmailAndPassword(auth,email,password)
-    .then(()=>{
+    .then((userCredential)=>{
       console.log('Cuenta Creada!')
       const user=userCredential.user;
       console.log(user)
@@ -36,7 +36,7 @@ function LoginScreen(){
 
   const handleSignIn=()=>{
     signInWithEmailAndPassword(auth,email,password)
-    .then(()=>{
+    .then((userCredential)=>{
       console.log('Acceso Exitoso!')
       const user=userCredential.user;
       console.log(user)
