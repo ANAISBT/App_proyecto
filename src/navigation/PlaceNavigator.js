@@ -1,8 +1,10 @@
+import { Platform, TouchableOpacity } from "react-native";
+
 import HomeScreen from "../screens/Home";
+import IonicIcons from '@expo/vector-icons/Ionicons';
 import LoginScreen from "../screens/Login";
 import MapScreen from "../screens/MapScreen";
 import NewTaskScreen from "../screens/NewTaskScreen";
-import { Platform } from "react-native";
 import React from "react";
 import TaskDetailsScreen from "../screens/TaskDetailScreen";
 import colors from "../utils/colors";
@@ -26,7 +28,18 @@ const PlaceNavigator=()=>(
         <Stack.Screen name="TaskDetails" component={TaskDetailsScreen} options={{title:"Detalles de la Tarea"}}/>
         <Stack.Screen name="NewTask" component={NewTaskScreen} options={{title:"Nueva Tarea"}}/>
         <Stack.Screen name="Map" component={MapScreen} options={{title:"Mapa"}}/>
-        <Stack.Screen name="Home" component={HomeScreen} options={{title:"Lista de Tareas"}}/>
+        <Stack.Screen name="Home" component={HomeScreen} 
+        options={({navigation})=>({
+            title:"Lista de Tareas",
+            headerRight: ()=>(
+                <TouchableOpacity onPress={()=> navigation.navigate("NewTask")}>
+                    <IonicIcons name="add-circle-outline" 
+                    color={colors.white}
+                    size={40}
+                    style={{marginRight:20}}/>
+                </TouchableOpacity>
+            )
+            })}/>
 
     </Stack.Navigator>
 
